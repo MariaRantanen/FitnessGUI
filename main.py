@@ -2,16 +2,16 @@
 # ===================================
 
 # LIBRARIES AND MODULES
-import sys
+import sys # For system arguments if needed to run the app
 from PyQt5 import QtCore # Core functionality of Qt
-from PyQt5 import QtWidgets # UI elements functionality
-from PyQt5.uic import loadUi
-import kuntoilija
-import timetools
+from PyQt5 import QtWidgets as QW # UI elements functionality
+from PyQt5.uic import loadUi # Reads the UI file
+import kuntoilija # Home brew module for athlete objects
+import timetools # DIY module for date and time calculations
 # TODO: Import some library able to plot trends and make it as widget in the UI
 
 # Class for the main window
-class MainWindow(QtWidgets.QMainWindow):
+class MainWindow(QW.QMainWindow):
 
     """MainWindow for the fitness app"""
 
@@ -23,31 +23,83 @@ class MainWindow(QtWidgets.QMainWindow):
         loadUi('main.ui', self)
 
         # Define UI Controls ie buttons and input fields
-        self.nameLE = self.nameLineEdit
+        self.nameLE = self.findChild(QW.QLineEdit, 'nameLineEdit')
+        self.nameLE.textEdited.connect(self.activateCalculatePB)
+        
         self.birthDateE = self.birthDateEdit
+        self.birthDateE.dateChanged.connect(self.activateCalculatePB)
         self.genderCB = self.genderComboBox
+        self.genderCB.currentTextChanged.connect(self.activateCalculatePB)
         self.weighingDateE = self.weighingDateEdit
         
         # Set the weighing date to the current date
         self.weighingDateE.setDate(QtCore.QDate.currentDate()) 
-        self.heightSB = self.heightSpinBox
-        self.weightSB = self.weightSpinBox
-        self.neckSB =  self.neckSpinBox
-        self.waistSB = self.waistSpinBox 
-        self.hipSB = self.hipSpinBox
         
-        self.calculatePB = self.calculatePushButton
+        self.heightSB = self.heightSpinBox
+        self.heightSB.valueChanged.connect(self.activateCalculatePB)
+        self.weightSB = self.weightSpinBox
+        self.weightSB.valueChanged.connect(self.activateCalculatePB)
+        self.neckSB =  self.neckSpinBox
+        self.neckSB.valueChanged.connect(self.activateCalculatePB)
+        self.waistSB = self.waistSpinBox 
+        self.waistSB.valueChanged.connect(self.activateCalculatePB)
+        self.hipSB = self.hipSpinBox
+        self.hipSB.setEnabled(False)
+        self.hipSB.valueChanged.connect(self.activateCalculatePB)
+        
+        # TODO: Disable Calculate button until values have been edited
+        # self.calculatePB = self.calculatePushButton
+        self.calculatePB = self.findChild(QW.QPushButton, 'calculatePushButton')
         self.calculatePB.clicked.connect(self.calculateAll)
+        self.calculatePB.setEnabled(False)
 
-        self.savePB = self.savePushButton
+        # TODO: Disable Save button until new values are calculated
+        # self.savePB = self.savePushButton
+        self.savePB = self.findChild(QW.QPushButton, 'savePushButton')
         self.savePB.clicked.connect(self.saveData)
-
+        self.savePB.setEnabled(False)
+        
     # Define slots ie methods
 
+    
+    def activateCalculatePB(self):
+        self.calculatePB.setEnabled(True)
+        if self.nameLE.text() == '':
+            self.calculatePB.setEnabled(False)
+            
+        if self.birthDateE.date() == QtCore.QDate(1900, 1, 1):
+            self.calculatePB.setEnabled(False)
+        
+        if self.genderCB.currentText() == '':
+            self.calculatePB.setEnabled(False)
+            
+        if self.heightSB.value() == 100:
+            self.calculatePB.setEnabled(False)
+            
+        if self.weightSB.value() == 20:
+            self.calculatePB.setEnabled(False)
+            
+        if self.neckSB.value() == 10:
+            self.calculatePB.setEnabled(False)
+            
+        if self.waistSB.value() == 30:
+            self.calculatePB.setEnabled(False)
+            
+        if self.genderCB.currentText() == 'Nainen':
+            self.hipSB.setEnabled(True)
+            
+            if self.hipSB.value() == 50:
+                self.calculatePB.setEnabled(False)
+        else:
+            self.hipSB.setEnabled(False)
+    
     # Calculates BMI, Finnish and US fat percentages and updates corresponding labels
     def calculateAll(self):
+        name = self.nameLE.text()
         height = self.heightSB.value() # Spinbox value as an integer
         weight = self.weightSB.value()
+        self.calculatePB.setEnabled(True)
+        self.savePB.setEnabled(True)
         
         # Convert birthday to ISO string using QtCore's methods
         birthday = self.birthDateE.date().toSring(format=QtCore.Qt.ISODate)
@@ -66,19 +118,39 @@ class MainWindow(QtWidgets.QMainWindow):
         # Calculate time difference using our home made tools
         age = timetools.datediff2(birthday, dateOfWeighing, 'year') 
         
-        # Create an athlete from Kuntoilija class
-        # athlete = kuntoilija.Kuntoilija()
-        # bmi = athlete.bmi
-
-        self.bmiLabel.setText(dateOfWeighing)
-
+        neck = self.neckSB.value()
+        waist = self.waistSB.value()
+        hip = self.hipSB.value()
+        
+        if age > 18:
+            # Create an athlete from Kuntoilija class
+            athlete = kuntoilija.Kuntoilija(name, height, weight, age, gender, dateOfWeighing)
+        
+        else:
+            # Create the athlete from JunioriKuntoilija class
+            athlete = kuntoilija.JunioriKuntoilija(name, height, weight, age, gender)
+            
+        bmi = athlete.bmi   
+        self.bmiLabel.setText(str(bmi))
+        
+        fiFatPercentage = athlete.rasvaprosentti()
+        
+        if gender == 1:
+            usaFatPercentage = athlete.usa_rasvaprosentti_mies(height, waist, neck)
+        else: 
+            usaFatPercentage = athlete.usa_rasvaprosentti_nainen(height, waist, hip, neck)
+        
+        # Set fat percentage    
+        self.fatFiLabel.setText(str(fiFatPercentage))
+        self.fatUsLabel.setText(str(usaFatPercentage))
+            
     # Saves data to disk
     def saveData(self):
         pass
 
 if __name__ == "__main__":
     # Create the application
-    app = QtWidgets.QApplication(sys.argv)
+    app = QW.QApplication(sys.argv)
 
     # Create the Main Window object from MainWindow class and show it on the screen
     appWindow = MainWindow()
