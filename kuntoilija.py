@@ -15,7 +15,7 @@ class Kuntoilija:
     """Luokka kuntoilijan tietoja varten"""
 
     # Oliomuodostin eli kontruktori, self -> tuleva olio
-    def __init__(self, nimi, pituus, paino, ika, sukupuoli, paiva):
+    def __init__(self, nimi, pituus, paino, ika, sukupuoli, kaula, vyotaro, lantio, paiva):
 
         # Määritellään tulevan olion ominaisuudet (property), luokan kentät (field)
         self.nimi = nimi
@@ -23,13 +23,28 @@ class Kuntoilija:
         self.paino = paino
         self.ika = ika
         self.sukupuoli = sukupuoli
+        self.kaula = kaula
+        self.vyotaro = vyotaro
+        self.lantio = lantio
         self.bmi = fitness.laske_bmi(self.paino, self.pituus)
-        self.punnitus_paiva =paiva
+        self.fi_rasva = self.rasvaprosentti()
+        
+        if self.sukupuoli == 1:
+            self.usa_rasvaprosentti = self.usa_rasvaprosentti_mies(self.pituus, self.vyotaro, self.kaula)
+        else:
+            self.usa_rasvaprosentti = self.usa_rasvaprosentti_nainen(self.pituus, self.vyotaro, self.lantio, self.kaula)
+        self.punnitus_paiva = paiva
 
     # Metodi rasvaprosentin laskemiseen (yleinen / aikuinen)
     def rasvaprosentti(self):
-        self.rasvaprosentti = fitness.aikuisen_rasvaprosentti(
+        if self.ika >= 18:
+            
+            self.rasvaprosentti = fitness.aikuisen_rasvaprosentti(
             self.bmi, self.ika, self.sukupuoli)
+            
+        else:
+            self.rasvaprosentti = fitness.lapsen_rasvaprosentti(
+                self.bmi, self.ika, self.sukupuoli)    
         return self.rasvaprosentti
     
     # Metodit rasvaprosenttien laskemiseen USA:n armeijan metodeilla
@@ -78,27 +93,11 @@ class JunioriKuntoilija(Kuntoilija):
 
 
 if __name__ == "__main__":
-
-    # Luodaan olio luokasta Kuntoilija
-    kuntoilija = Kuntoilija("Kalle Kuntoilija", 171, 65, 40, 1)
-    print(kuntoilija.nimi, "painaa", kuntoilija.paino, "kg")
-   #print("Painoindeksi on ", .painoindeksi())
-    print("Rasvaprosentti on", kuntoilija.rasvaprosentti())
-
-    # Toinen olio luokasta Kuntoilija 
-    kuntoilija1 = Kuntoilija("Jutta Jumppaaja", 156, 60, 33, 0)
-    print(kuntoilija1.nimi, "painaa", kuntoilija1.paino, "kg")
-    #print("Painoindeksi on ", kuntoilija1.painoindeksi())
-    print("Rasvaprosentti on", kuntoilija1.rasvaprosentti())
-
-    # Luodaan olio luokasta Juniorikuntoilija
-    juniorikuntoilija = JunioriKuntoilija("Aku", 171, 65, 16, 1)
-    print(juniorikuntoilija.nimi, "painaa", juniorikuntoilija.paino, "kg")
-    #("Painoindeksi on ", juniorikuntoilija.painoindeksi())
-    print("Rasvaprosentti on", juniorikuntoilija.rasvaprosentti())
-
-    # Toinen olio luokasta Juniorikuntoilija
-    juniorikuntoilija1 = JunioriKuntoilija("Anni", 156, 60, 16, 0)
-    print(juniorikuntoilija1.nimi, "painaa", juniorikuntoilija1.paino, "kg")
-    #("Painoindeksi on ", juniorikuntoilija1.painoindeksi())
-    print("Rasvaprosentti on", juniorikuntoilija1.rasvaprosentti())
+    
+    kuntoilija = Kuntoilija('Mika', 171, 75, 60, 1, 30, 90, 0, '2023-04-21')
+    print('bmi on', kuntoilija.bmi)
+    print('Suomalainen rasvaprosentti on', kuntoilija.fi_rasva)
+    print('Amerikkalainen rasvaprosentti on', kuntoilija.usa_rasvaprosentti)
+    
+    
+    

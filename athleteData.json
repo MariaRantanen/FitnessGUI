@@ -1,0 +1,24 @@
+[
+    {
+        "nimi": "Maria",
+        "pituus": 156.0,
+        "paino": 67.0,
+        "ika": 33.602739726027394,
+        "sukupuoli": 0,
+        "pvm": "2023-04-21",
+        "bmi": 27.5,
+        "rasvaprosenttiFI": 35.3,
+        "rasvaprosenttiUs": 36.9
+    },
+    {
+        "nimi": "MariaR",
+        "pituus": 156.0,
+        "paino": 67.0,
+        "ika": 33.6,
+        "sukupuoli": 0,
+        "pvm": "2023-04-21",
+        "bmi": 27.5,
+        "rasvaprosenttiFI": 35.3,
+        "rasvaprosenttiUs": 36.9
+    }
+]
