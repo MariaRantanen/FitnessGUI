@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>651</width>
-    <height>685</height>
+    <width>552</width>
+    <height>547</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
      <rect>
       <x>20</x>
       <y>50</y>
-      <width>211</width>
-      <height>22</height>
+      <width>191</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="font">
@@ -37,7 +37,7 @@
      <rect>
       <x>20</x>
       <y>10</y>
-      <width>49</width>
+      <width>101</width>
       <height>41</height>
      </rect>
     </property>
@@ -51,8 +51,13 @@
       <x>20</x>
       <y>110</y>
       <width>110</width>
-      <height>41</height>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="locale">
      <locale language="Finnish" country="Finland"/>
@@ -83,8 +88,13 @@
       <x>20</x>
       <y>190</y>
       <width>71</width>
-      <height>31</height>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="minimum">
      <double>100.000000000000000</double>
@@ -100,10 +110,15 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>140</y>
+      <y>150</y>
       <width>91</width>
-      <height>71</height>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Pituus</string>
@@ -114,9 +129,14 @@
      <rect>
       <x>120</x>
       <y>190</y>
-      <width>81</width>
-      <height>31</height>
+      <width>61</width>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="minimum">
      <double>20.000000000000000</double>
@@ -129,9 +149,9 @@
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>140</y>
-      <width>141</width>
-      <height>71</height>
+      <y>150</y>
+      <width>61</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
@@ -141,11 +161,16 @@
    <widget class="QSpinBox" name="neckSpinBox">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>210</x>
       <y>190</y>
       <width>61</width>
-      <height>31</height>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="minimum">
      <number>10</number>
@@ -157,8 +182,13 @@
       <x>20</x>
       <y>260</y>
       <width>51</width>
-      <height>31</height>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="minimum">
      <number>30</number>
@@ -172,9 +202,14 @@
      <rect>
       <x>120</x>
       <y>260</y>
-      <width>71</width>
-      <height>31</height>
+      <width>41</width>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="minimum">
      <number>50</number>
@@ -186,10 +221,10 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>140</y>
-      <width>141</width>
-      <height>61</height>
+      <x>210</x>
+      <y>150</y>
+      <width>71</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
@@ -202,7 +237,7 @@
       <x>20</x>
       <y>220</y>
       <width>131</width>
-      <height>51</height>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
@@ -215,7 +250,7 @@
       <x>120</x>
       <y>220</y>
       <width>111</width>
-      <height>51</height>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
@@ -225,11 +260,16 @@
    <widget class="QPushButton" name="calculatePushButton">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>210</x>
       <y>260</y>
-      <width>111</width>
-      <height>31</height>
+      <width>91</width>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Laske</string>
@@ -238,11 +278,16 @@
    <widget class="QPushButton" name="savePushButton">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>330</x>
       <y>260</y>
-      <width>111</width>
-      <height>31</height>
+      <width>101</width>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Tallenna</string>
@@ -251,11 +296,16 @@
    <widget class="QDateEdit" name="birthDateEdit">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>230</x>
       <y>50</y>
-      <width>110</width>
-      <height>22</height>
+      <width>101</width>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="locale">
      <locale language="Finnish" country="Finland"/>
@@ -280,9 +330,9 @@
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>230</x>
       <y>10</y>
-      <width>161</width>
+      <width>91</width>
       <height>41</height>
      </rect>
     </property>
@@ -293,11 +343,16 @@
    <widget class="QComboBox" name="genderComboBox">
     <property name="geometry">
      <rect>
-      <x>380</x>
+      <x>350</x>
       <y>50</y>
       <width>111</width>
-      <height>22</height>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="locale">
      <locale language="Finnish" country="Finland"/>
@@ -319,10 +374,10 @@
    <widget class="QLabel" name="bmiLabel">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>30</x>
       <y>350</y>
-      <width>311</width>
-      <height>61</height>
+      <width>61</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -337,10 +392,10 @@
    <widget class="QLabel" name="fatFiLabel">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>450</y>
-      <width>61</width>
-      <height>51</height>
+      <x>180</x>
+      <y>350</y>
+      <width>41</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -355,10 +410,10 @@
    <widget class="QLabel" name="fatUsLabel">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>450</y>
-      <width>91</width>
-      <height>51</height>
+      <x>360</x>
+      <y>350</y>
+      <width>51</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -373,10 +428,10 @@
    <widget class="QLabel" name="label_11">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>290</y>
-      <width>211</width>
-      <height>81</height>
+      <x>30</x>
+      <y>320</y>
+      <width>101</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
@@ -386,9 +441,9 @@
    <widget class="QLabel" name="label_12">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>410</y>
-      <width>231</width>
+      <x>180</x>
+      <y>310</y>
+      <width>121</width>
       <height>41</height>
      </rect>
     </property>
@@ -399,9 +454,9 @@
    <widget class="QLabel" name="label_13">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>400</y>
-      <width>281</width>
+      <x>360</x>
+      <y>300</y>
+      <width>151</width>
       <height>61</height>
      </rect>
     </property>
@@ -412,14 +467,32 @@
    <widget class="QLabel" name="label_14">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>20</y>
-      <width>201</width>
-      <height>31</height>
+      <x>350</x>
+      <y>10</y>
+      <width>101</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
      <string>Sukupuoli</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="testUiPushButton">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>140</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Testaa</string>
     </property>
    </widget>
   </widget>
@@ -428,12 +501,131 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>651</width>
+     <width>552</width>
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuTiedosto">
+    <property name="title">
+     <string>Tiedosto</string>
+    </property>
+    <widget class="QMenu" name="menuJaa">
+     <property name="title">
+      <string>Jaa</string>
+     </property>
+     <addaction name="actionFacebook"/>
+     <addaction name="actionTwitter"/>
+     <addaction name="actionInstagram"/>
+     <addaction name="separator"/>
+    </widget>
+    <widget class="QMenu" name="menuAsetukset">
+     <property name="title">
+      <string>Asetukset</string>
+     </property>
+     <addaction name="actionKieli"/>
+     <addaction name="actionUlkoasu"/>
+    </widget>
+    <addaction name="actionTulosta"/>
+    <addaction name="menuJaa"/>
+    <addaction name="menuAsetukset"/>
+    <addaction name="separator"/>
+    <addaction name="actionsulje"/>
+   </widget>
+   <widget class="QMenu" name="menuMuokka">
+    <property name="title">
+     <string>Muokkaa</string>
+    </property>
+    <addaction name="actionPalauta_oletukset"/>
+   </widget>
+   <widget class="QMenu" name="menuOhjeet">
+    <property name="title">
+     <string>Ohjeet</string>
+    </property>
+    <addaction name="actionOhje"/>
+   </widget>
+   <addaction name="menuTiedosto"/>
+   <addaction name="menuMuokka"/>
+   <addaction name="menuOhjeet"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionTulosta">
+   <property name="text">
+    <string>Tulosta...</string>
+   </property>
+  </action>
+  <action name="actionsulje">
+   <property name="text">
+    <string>Sulje</string>
+   </property>
+  </action>
+  <action name="actionFacebook">
+   <property name="text">
+    <string>Facebook</string>
+   </property>
+  </action>
+  <action name="actionTwitter">
+   <property name="text">
+    <string>Twitter</string>
+   </property>
+  </action>
+  <action name="actionInstagram">
+   <property name="text">
+    <string>Instagram</string>
+   </property>
+  </action>
+  <action name="actionKieli">
+   <property name="text">
+    <string>Kieli</string>
+   </property>
+  </action>
+  <action name="actionUlkoasu">
+   <property name="text">
+    <string>Ulkoasu</string>
+   </property>
+  </action>
+  <action name="actionAutomaattinen_tallennus">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Automaattinen tallennus</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
+   </property>
+  </action>
+  <action name="actionY_tila">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Yötila</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
+   </property>
+  </action>
+  <action name="actionPoista_k_ytt_j">
+   <property name="text">
+    <string>Poista käyttäjä</string>
+   </property>
+  </action>
+  <action name="actionPalauta_oletukset">
+   <property name="text">
+    <string>Palauta oletukset</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
+   </property>
+  </action>
+  <action name="actionOhje">
+   <property name="text">
+    <string>Ohje</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
