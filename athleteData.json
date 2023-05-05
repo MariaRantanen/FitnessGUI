@@ -20,5 +20,27 @@
         "bmi": 27.5,
         "rasvaprosenttiFI": 35.3,
         "rasvaprosenttiUs": 36.9
+    },
+    {
+        "nimi": "n",
+        "pituus": 156.0,
+        "paino": 650.0,
+        "ika": 123.41643835616438,
+        "sukupuoli": 0,
+        "pvm": "2023-05-05",
+        "bmi": 267.1,
+        "rasvaprosenttiFI": 343.5,
+        "rasvaprosenttiUs": 37.9
+    },
+    {
+        "nimi": "m",
+        "pituus": 156.0,
+        "paino": 65.0,
+        "ika": 33.64109589041096,
+        "sukupuoli": 0,
+        "pvm": "2023-05-05",
+        "bmi": 26.7,
+        "rasvaprosenttiFI": 34.4,
+        "rasvaprosenttiUs": 36.5
     }
 ]

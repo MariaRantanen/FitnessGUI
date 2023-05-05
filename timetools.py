@@ -27,10 +27,32 @@ def timediff(t1, t2):
     """
     t1 = datetime.datetime.strptime(t1, "%H:%M:%S")
     t2 = datetime.datetime.strptime(t2, "%H:%M:%S")
-
-    # Function calcultates a timedelta which supports only seconds or microseconds
-    seconds = abs((t2 - t1).seconds)
+    
+    # To get absolute value chek if t2 is greater than t1 
+    if t2 > t1:
+        # Function calcultates a timedelta which supports only seconds or microseconds
+        seconds = abs((t2 - t1).seconds)
+    else:    
+        seconds = abs((t1 - t2).seconds)
+        
     hours = seconds / 3600 # minute 60 seconds, hour 60 minutes
+    return hours
+
+def dateTimeDiff(start, end):
+    """Returns difference between two moments
+    Args:
+        start (str): date time value in format YYYY-MM-dd hh:mm:ss
+        end (str): date time value in format YYYY-MM-dd hh:mm:ss
+    Returns:
+        float: difference in hours
+    """
+    v1 = datetime.datetime.strptime(start, "%Y-%m-%d %H:%M:%S")
+    v2 = datetime.datetime.strptime(end, "%Y-%m-%d %H:%M:%S")
+    difference = v2 - v1
+    
+    # Total_seconds calculates also seconds in the date part of dates
+    seconds = difference.total_seconds()
+    hours = seconds / 3600
     return hours
 
 def datediff2(d1, d2, unit):
@@ -67,6 +89,39 @@ def timediff2(t1, t2, unit):
     value = seconds / divider
     return value
 
+def dateTimeDiff2(start, end, unit):
+    """Calculates difference between date time values in given units
+
+    Args:
+        start (str): date time value in format YYYY-MM-dd hh:mm:ss
+        end (str): date time value in format YYYY-MM-dd hh:mm:ss
+        unit (str): name of time unit: day, hour, minute or second
+
+    Returns:
+        float: difference in given units
+    """
+    v1 = datetime.datetime.strptime(start, "%Y-%m-%d %H:%M:%S")
+    v2 = datetime.datetime.strptime(end, "%Y-%m-%d %H:%M:%S")
+    difference = v2 - v1
+    units = {'day': 86400, 'hour': 3600, 'minute': 60, 'second': 1}
+    divider = units[unit]
+    
+    # Total_seconds calculates also seconds in the date part of dates
+    seconds = difference.total_seconds()
+    value = seconds / divider
+    return value
+
+def finnishweekdayOrder(weekday):
+    weekdayNumber = {'maanantai': 1, 'tiistai': 2, 'keskiviikko': 3, 
+            'torstai': 4,'perjantai': 5, 'lauantai': 6, 'sunnuntai': 7}
+    try:
+        value = f'{weekday} on viikon {weekdayNumber[weekday]}. päivä'
+    except Exception as error:
+        value = f'{weekday} ei ole viikonpäivä, tarkista syötteesi'
+    return value
+    
+    
+    
 if __name__ == "__main__":
     
     # Let's test date difference
@@ -81,3 +136,7 @@ if __name__ == "__main__":
     time2 = '15:25:00'
     ero = timediff2(time1, time2, 'minute')
     print('ero oli', ero, 'minuuttia')
+    
+    print(dateTimeDiff('2023-04-28 10:00:00', '2023-04-29 11:00:00'), 'on v1')
+    
+    
