@@ -9,6 +9,7 @@ from PyQt5.uic import loadUi # Reads the UI file
 import kuntoilija # Home brew module for athlete objects
 import timetools # DIY module for date and time calculations
 import athleteFile # Home made module for processing data files
+import ohje
 # TODO: Import some library able to plot trends and make it as widget in the UI
 
 # Class for the main window
@@ -53,14 +54,16 @@ class MainWindow(QW.QMainWindow):
         self.setStatusBar(self.statusBar)
         self.statusBar.show()
         
-
-        
         # self.calculatePB = self.calculatePushButton
         self.calculatePB = self.findChild(QW.QPushButton, 'calculatePushButton')
         self.calculatePB.clicked.connect(self.calculateAll)
         self.calculatePB.setEnabled(False)
 
-        # self.savePB = self.savePushButton
+        # Temporary push button for inserting test values into controls
+        self.testPB = self.testUiPushButton
+        self.testPB.clicked.connect(self.insertTestValues)
+        
+        # A push button for saving user data
         self.savePB = self.findChild(QW.QPushButton, 'savePushButton')
         self.savePB.clicked.connect(self.saveData)
         self.savePB.setEnabled(False)
@@ -73,20 +76,61 @@ class MainWindow(QW.QMainWindow):
             self.dataList = data[3]
         except Exception as e:
             data = (1, 'Error', str(e), self.dataList)
-        
+            
+        # MENU ACTIONS 
+        self.actionPalauta_oletukset.triggered.connect(self.restoreDefaults)
+        self.actionOhje.triggered.connect(self.openHelpDialog)      
                
         # Read previous athlete_data from disk
         
     # Define slots ie methods
     
     # Create a alerting method
-    def alert(self, message, detailedMessage):
+    def alert(self, windowTitle, message, detailedMessage):
         msgBox = QW.QMessageBox()
-        msgBox.setIcon(QW.QMessageBox.critical)
-        msgBox.setWindowTitle('Tapahtui vakava virhe')
+        msgBox.setIcon(QW.QMessageBox.Critical)
+        msgBox.setWindowTitle(windowTitle)
         msgBox.setText(message)
         msgBox.setDetailedText(detailedMessage)
         msgBox.exec()
+        
+    def warn(self, windowTitle, message, detailedMessage):
+        msgBox = QW.QMessageBox()
+        msgBox.setIcon(QW.QMessageBox.Warning)
+        msgBox.setWindowTitle(windowTitle)
+        msgBox.setText(message)
+        msgBox.setDetailedText(detailedMessage)
+        msgBox.exec()    
+        
+    def inform(self, windowTitle, message, detailedMessage):
+    
+        msgBox = QW.QMessageBox()
+        msgBox.setIcon(QW.QMessageBox.Information)
+        msgBox.setWindowTitle(windowTitle)
+        msgBox.setText(message)
+        msgBox.setDetailedText(detailedMessage)
+        msgBox.exec()
+        
+    def showMessageBox(self, windowTitle, message, detailedMessage, icon='Information'):
+        """Creates a message box for various types of messages
+
+        Args:
+            windowTitle (str): Header for the message window
+            message (str): Message to be shown
+            detailedMessage (str): A message that can be shown by pressing details button
+            icon (str, optional): Allowed values: NoIcon, Information, Question, Warning and Critical
+            Defaults to Information.
+        """
+        iconTypes = {'Information': QW.QMessageBox.Information, 'NoIcon': QW.QMessageBox.NoIcon,
+         'Question': QW.QMessageBox.Question, 'Warning': QW.QMessageBox.Warning,
+         'Critical': QW.QMessageBox.Critical}
+        msgBox = QW.QMessageBox()
+        msgBox.setIcon(iconTypes[icon])
+        msgBox.setWindowTitle(windowTitle)
+        msgBox.setText(message)
+        msgBox.setDetailedText(detailedMessage)
+        msgBox.exec()
+        pass    
     
     def activateCalculatePB(self):
         self.calculatePB.setEnabled(True)
@@ -118,6 +162,18 @@ class MainWindow(QW.QMainWindow):
                 self.calculatePB.setEnabled(False)
         else:
             self.hipsSB.setEnabled(False)
+            
+    def insertTestValues(self):
+        # Set test values to all controls
+        self.nameLE.setText('Teppo Testi')
+        testBirthDay = QtCore.QDate(1999, 12, 31)
+        self.birthDateE.setDate(testBirthDay)
+        self.genderCB.setCurrentText('Mies')
+        self.heightSB.setValue(171)
+        self.weightSB.setValue(75)
+        self.neckSB.setValue(30)
+        self.waistSB.setValue(90)
+            
     
     # Calculates BMI, Finnish and US fat percentages and updates corresponding labels
     def calculateAll(self):
@@ -143,9 +199,10 @@ class MainWindow(QW.QMainWindow):
         
         # Calculate time difference using our home made tools
         age = timetools.datediff2(birthday, dateOfWeighing, 'year') 
-        #age = round(age, 1)
-        
         neck = self.neckSB.value()
+        if neck < 21:
+            #self.alert('Tarkista kaulan koko', 'Kaulan ympärys liian pieni', 'Kaulan koko voi olla välillä 21 - 60  cm')
+            self.showMessageBox('Tarkista kaulan koko', 'Kaulan ympärys virheellinen', 'Sallitut arvot 21-60 cm', 'Warning')
         waist = self.waistSB.value()
         hips = self.hipsSB.value()
         
@@ -188,16 +245,22 @@ class MainWindow(QW.QMainWindow):
             self.alert(status[1], status[2])
         else:       
             # Set all inputs to their default values
-            self.nameLE.clear()
-            zeroDate = QtCore.QDate(1900, 1, 1)
-            self.birthDateE.setDate(zeroDate)
-            self.heightSB.setValue(100)
-            self.weightSB.setValue(20)
-            self.neckSB.setValue(10)
-            self.waistSB.setValue(30)
-            self.hipsSB.setValue(50)
-            self.savePB.setEnabled(False)
+            self.restoreDefaults()
         
+    def restoreDefaults(self):
+        self.nameLE.clear()
+        zeroDate = QtCore.QDate(1900, 1, 1)
+        self.birthDateE.setDate(zeroDate)
+        self.heightSB.setValue(100)
+        self.weightSB.setValue(20)
+        self.neckSB.setValue(10)
+        self.waistSB.setValue(30)
+        self.hipsSB.setValue(50)
+        self.savePB.setEnabled(False)
+        
+    def openHelpDialog(self):
+        openHelp = ohje.OpenHelp()
+        openHelp.exec()
 
 if __name__ == "__main__":
     # Create the application
